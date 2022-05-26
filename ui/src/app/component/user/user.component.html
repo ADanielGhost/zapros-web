@@ -1,0 +1,35 @@
+<p>user works!</p>
+<br>
+
+<div (click)="this.getOneUser()">
+  <p>getOneUser</p>
+</div>
+<br>
+
+<div (click)="this.getAllUsers()">
+  <p>getAllUsers</p>
+</div>
+<br>
+
+<div (click)="this.addOneUser()">
+  <p>addOneUser</p>
+</div>
+<br>
+
+<div (click)="this.addManyUsers()">
+  <p>addManyUsers</p>
+</div>
+<br>
+
+<div *ngIf="userList">
+  allUsers:
+  <div *ngFor="let userThis of userList">>
+    {{userThis.id}} {{userThis.name}} {{userThis.email}}
+  </div>
+</div>
+<br>
+
+<div *ngIf="userOne">
+  oneUser: {{userOne.id}} {{userOne.name}} {{userOne.email}}
+</div>
+<br>
