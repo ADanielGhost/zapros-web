@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {BackendService} from "./backend.service";
 import {Observable} from "rxjs";
 // @ts-ignore
-import {User} from "../../app/type/user";
+import {User} from "../type/user";
 
 @Injectable({
   providedIn: 'root'

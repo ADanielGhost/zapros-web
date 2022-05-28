@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-// @ts-ignore
-import {User} from "../../app/type/user";
 import {UserService} from "../../service/user.service";
-import {Observable} from "rxjs";
+import {User} from "../../type/user";
 
 @Component({
   selector: 'app-user',
@@ -11,7 +9,6 @@ import {Observable} from "rxjs";
 })
 export class UserComponent implements OnInit {
 
-  public userOne: User | undefined;
   public userList: User[] | undefined;
 
   constructor(
@@ -19,12 +16,8 @@ export class UserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-  }
-
-  public getOneUser() {
-    const userId: number = 3;
-    this._userService.getOneUser(userId).subscribe(x => {
-     this.userOne = x;
+    this._userService.getAllUsers().subscribe(x => {
+      this.userList = x;
     });
   }
 
@@ -40,7 +33,7 @@ export class UserComponent implements OnInit {
       name: 'keker6',
       email: 'lol6@lollll'
     }
-    return this._userService.addOneUser(user);
+    this._userService.addOneUser(user).subscribe();
   }
 
   public addManyUsers() {
@@ -57,6 +50,6 @@ export class UserComponent implements OnInit {
       }
     ];
 
-    return this._userService.addManyUsers(users);
+    this._userService.addManyUsers(users).subscribe();
   }
 }

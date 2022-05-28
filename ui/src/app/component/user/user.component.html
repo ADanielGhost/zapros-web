@@ -21,7 +21,7 @@
 </div>
 <br>
 
-<div *ngIf="userList">
+<div *ngIf="this.userList">
   allUsers:
   <div *ngFor="let userThis of userList">>
     {{userThis.id}} {{userThis.name}} {{userThis.email}}
@@ -29,7 +29,7 @@
 </div>
 <br>
 
-<div *ngIf="userOne">
-  oneUser: {{userOne.id}} {{userOne.name}} {{userOne.email}}
+<div *ngIf="this.userOne">
+  oneUser: {{this.userOne.id}} {{this.userOne.name}} {{this.userOne.email}}
 </div>
 <br>
