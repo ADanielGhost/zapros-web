@@ -1,0 +1,45 @@
+{
+  "name": "Data NIR",
+  "alternativeList": [
+    {
+      "name": "S1(A3,B1,C2)",
+      "assessmentList": [
+        {"name": "A3"},
+        {"name": "B1"},
+        {"name": "C2"}
+      ]
+    },
+    {
+      "name": "S2(A3,B2,C2)",
+      "assessmentList": [
+        {"name": "A3"},
+        {"name": "B2"},
+        {"name": "C2"}
+      ]
+    },
+    {
+      "name": "S3(A1,B2,C3)",
+      "assessmentList": [
+        {"name": "A1"},
+        {"name": "B2"},
+        {"name": "C3"}
+      ]
+    },
+    {
+      "name": "S4(A1,B1,C2)",
+      "assessmentList": [
+        {"name": "A1"},
+        {"name": "B1"},
+        {"name": "C2"}
+      ]
+    },
+    {
+      "name": "S5(A2,B1,C2)",
+      "assessmentList": [
+        {"name": "A2"},
+        {"name": "B1"},
+        {"name": "C2"}
+      ]
+    }
+  ]
+}

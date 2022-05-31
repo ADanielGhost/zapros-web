@@ -3,19 +3,23 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MaincComponent } from './component/mainc/mainc.component';
 import { NotFoundComponent } from './component/not-found/not-found.component';
 import {HttpClientModule} from "@angular/common/http";
 import {BackendService} from "./service/backend.service";
 import {UserService} from "./service/user.service";
 import { UserComponent } from './component/user/user.component';
+import { MainHeaderComponent } from './component/main-header/main-header.component';
+import { ProjectComponent } from './component/project/project.component';
+import { ProjectOneComponent } from './component/project-one/project-one.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MaincComponent,
     NotFoundComponent,
-    UserComponent
+    UserComponent,
+    MainHeaderComponent,
+    ProjectComponent,
+    ProjectOneComponent
   ],
   imports: [
     BrowserModule,

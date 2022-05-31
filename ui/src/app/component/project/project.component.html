@@ -1,0 +1,42 @@
+<section class="jumbotron text-center m-1">
+  <h1 class="jumbotron-heading">Проекты</h1>
+  <div class="container">
+    <p class="lead text-muted">Наборы критериев и альтернатив, для которых вы можете проходить опросы</p>
+  </div>
+</section>
+
+<div class="album py-5 bg-light">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-4" *ngFor="let project of this.projects">
+        <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">{{project.name}}</h4>
+          </div>
+          <div class="card-body">
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Кол-во критериев: {{project.criteriaList.length}}</li>
+              <li>Кол-во оценок в критериях:
+                <span *ngFor="let criteria of project.criteriaList">
+                  {{criteria.name}} -> {{criteria.assessmentList.length}}
+                </span>
+              </li>
+              <li>Кол-во наборов альтернатив: {{project.alternativePackageList.length}}</li>
+              <li>Кол-во альтернатив в наборах:
+                <span *ngFor="let alternativePackage of project.alternativePackageList">
+                  {{alternativePackage.name}} -> {{alternativePackage.alternativeList.length}}
+                </span>
+              </li>
+            </ul>
+            <button type="button"
+                    class="btn btn-lg btn-block btn-outline-primary"
+                    (click)="this.chooseProject(project)">
+              Выбрать проект
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

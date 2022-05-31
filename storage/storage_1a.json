@@ -1,0 +1,56 @@
+{
+  "name": "Project NIR",
+  "criteriaList": [
+    {
+      "name": "A",
+      "assessmentList": [
+        {
+          "name": "A1",
+          "rank": 1
+        },
+        {
+          "name": "A2",
+          "rank": 2
+        },
+        {
+          "name": "A3",
+          "rank": 3
+        }
+      ]
+    },
+    {
+      "name": "B",
+      "assessmentList": [
+        {
+          "name": "B1",
+          "rank": 1
+        },
+        {
+          "name": "B2",
+          "rank": 2
+        },
+        {
+          "name": "B3",
+          "rank": 3
+        }
+      ]
+    },
+    {
+      "name": "C",
+      "assessmentList": [
+        {
+          "name": "C1",
+          "rank": 1
+        },
+        {
+          "name": "C2",
+          "rank": 2
+        },
+        {
+          "name": "C3",
+          "rank": 3
+        }
+      ]
+    }
+  ]
+}
