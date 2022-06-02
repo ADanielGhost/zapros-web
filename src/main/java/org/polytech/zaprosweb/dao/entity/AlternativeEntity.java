@@ -1,7 +1,9 @@
-package org.polytech.zaprosweb.entity;
+package org.polytech.zaprosweb.dao.entity;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.polytech.zaprosweb.bean.Alternative;
+import org.polytech.zapros.bean.Alternative;
+import org.polytech.zapros.bean.Assessment;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,8 +28,8 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-@Table(name = "Alternatives")
-public class AlternativeEntity {
+@Table(name = "alternatives")
+public class AlternativeEntity implements IEntity<Alternative> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -45,4 +48,13 @@ public class AlternativeEntity {
     @ManyToOne
     @JoinColumn(name = "alternative_package_id", nullable = false)
     private AlternativePackageEntity alternativePackage;
+
+    @Override
+    public Alternative toModel() {
+        List<Assessment> assessments = assessmentSet.stream()
+            .map(AssessmentEntity::toModel)
+            .collect(Collectors.toList());
+
+        return new Alternative(id, name, assessments);
+    }
 }

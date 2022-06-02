@@ -1,0 +1,65 @@
+<div class="d-flex" *ngIf="!checkResult">
+  <button type="button"
+          class="btn btn-lg btn-block btn-outline-primary mx-auto"
+          (click)="askFirst()">
+    Как будете готовы отвечать, нажмите на эту кнопку
+  </button>
+</div>
+
+<div *ngIf="checkResult">
+  <section class="jumbotron text-center my-3">
+    <h1 class="jumbotron-heading">{{textCompare}}</h1>
+  </section>
+
+  <div class="d-flex" *ngIf="checkResult.over">
+    <button type="button"
+            class="btn btn-lg btn-block btn-outline-primary mx-auto"
+            (click)="sendAnswers()">
+      Молодец, го ответы на бэк
+    </button>
+  </div>
+
+  <div class="d-flex" *ngIf="!checkResult.over">
+    <div class="card mx-auto" style="width: 50%">
+      <div class="card">
+        <div class="card-header text-center">
+          {{textChoose}}
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="d-flex">
+              <button type="button"
+                      class="btn btn-lg btn-block btn-outline-primary mx-auto"
+                      style="width: 50%"
+                      (click)="addAnswer('BETTER')">
+                BETTER
+              </button>
+            </div>
+          </li>
+
+          <li class="list-group-item">
+            <div class="d-flex">
+              <button type="button"
+                      class="btn btn-lg btn-block btn-outline-primary mx-auto"
+                      style="width: 50%"
+                      (click)="addAnswer('WORSE')">
+                WORSE
+              </button>
+            </div>
+          </li>
+
+          <li class="list-group-item">
+            <div class="d-flex">
+              <button type="button"
+                      class="btn btn-lg btn-block btn-outline-primary mx-auto"
+                      style="width: 50%"
+                      (click)="addAnswer('EQUAL')">
+                EQUAL
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

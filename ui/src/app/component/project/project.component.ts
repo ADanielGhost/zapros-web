@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProjectService} from "../../service/project.service";
-import {Project} from "../../type/projects";
-import {NavigationExtras, Router} from "@angular/router";
-import {CurrentProjectService} from "../../service/current-project.service";
+import {Project} from "../../type/project-type";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-project',
@@ -15,20 +14,16 @@ export class ProjectComponent implements OnInit {
 
   constructor(
     private _projectService: ProjectService,
-    private _currentProjectService: CurrentProjectService,
     private router: Router
   ) { }
 
   ngOnInit() {
     this._projectService.getAllProjects().subscribe(projects => {
       this.projects = projects;
-      console.log(this.projects);
-      this.projects.forEach(x => console.log(x.id + " " + x.name))
     });
   }
 
   chooseProject(project: Project) {
-    this._currentProjectService.setCurrentProject(project);
     this.router.navigate(['/projects/', project.id]);
   }
 }

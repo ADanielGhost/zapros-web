@@ -1,38 +1,22 @@
 package org.polytech.zaprosweb.bean;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.polytech.zaprosweb.entity.ProjectEntity;
+import org.polytech.zapros.bean.Criteria;
+import org.polytech.zapros.bean.QuasiExpertConfig;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 @Getter
+@RequiredArgsConstructor
 @ToString
 public class Project {
-    private long id;
-    private String name;
-    private List<Criteria> criteriaList;
-    private List<AlternativePackage> alternativePackageList;
-
-    private Project() { }
-
-    public static Project of(ProjectEntity projectEntity) {
-        Project project = new Project();
-        project.id = projectEntity.getId();
-        project.name = projectEntity.getName();
-
-        project.criteriaList = projectEntity.getCriteriaSet()
-            .stream()
-            .map(Criteria::of)
-            .collect(Collectors.toList());
-
-        project.alternativePackageList = projectEntity.getAlternativePackageSet()
-            .stream()
-            .map(AlternativePackage::of)
-            .collect(Collectors.toList());
-
-        return project;
-    }
+    private final long id;
+    private final String name;
+    private final List<Criteria> criteriaList;
+    private final QuasiExpertConfig quasiExpertConfig;
+    private final List<AlternativePackage> alternativePackages;
 }

@@ -1,4 +1,4 @@
-package org.polytech.zaprosweb.util;
+package org.polytech.zaprosweb.utils;
 
 import java.util.List;
 import java.util.stream.Collectors;

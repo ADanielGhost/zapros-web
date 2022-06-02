@@ -3,7 +3,7 @@
   "criteriaList": [
     {
       "name": "A",
-      "assessmentList": [
+      "assessments": [
         {
           "name": "A1",
           "rank": 1
@@ -20,7 +20,7 @@
     },
     {
       "name": "B",
-      "assessmentList": [
+      "assessments": [
         {
           "name": "B1",
           "rank": 1
@@ -37,7 +37,7 @@
     },
     {
       "name": "C",
-      "assessmentList": [
+      "assessments": [
         {
           "name": "C1",
           "rank": 1

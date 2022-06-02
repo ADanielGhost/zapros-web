@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Project} from "../../type/projects";
-import {CurrentProjectService} from "../../service/current-project.service";
+import {Project} from "../../type/project-type";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProjectService} from "../../service/project.service";
+import {AlternativePackage} from "../../type/alternative-package";
 
 @Component({
   selector: 'app-project-one',
@@ -11,11 +11,11 @@ import {ProjectService} from "../../service/project.service";
 })
 export class ProjectOneComponent implements OnInit {
 
-  public curProject: Project | undefined;
+  public currentProject: Project | undefined;
 
   constructor(
-    private _currentProjectService: CurrentProjectService,
     private _projectService: ProjectService,
+    private router: Router,
     private route: ActivatedRoute
   ) {
   }
@@ -23,7 +23,14 @@ export class ProjectOneComponent implements OnInit {
   ngOnInit(): void {
     const id = parseInt(<string> this.route.snapshot.paramMap.get('id'));
     this._projectService.getProjectById(id).subscribe(x => {
-      this.curProject = x;
-    })
+      this.currentProject = x;
+      console.log(x);
+      console.log(x.id);
+      console.log(x.name);
+    });
+  }
+
+  choosePackage(alternativePackage: AlternativePackage) {
+    this.router.navigate(['/new/user', alternativePackage.id]);
   }
 }

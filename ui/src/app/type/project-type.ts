@@ -5,5 +5,5 @@ export type Project = {
   id: number,
   name: string,
   criteriaList: Criteria[],
-  alternativePackageList: AlternativePackage[]
+  alternativePackages: AlternativePackage[]
 }

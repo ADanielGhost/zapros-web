@@ -1,6 +1,7 @@
 package org.polytech.zaprosweb.dao;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -8,7 +9,8 @@ import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.polytech.zaprosweb.bean.AlternativePackage;
 import org.polytech.zaprosweb.dao.repository.AlternativePackageRepository;
-import org.polytech.zaprosweb.entity.*;
+import org.polytech.zaprosweb.dao.entity.*;
+import org.polytech.zaprosweb.exception.AlternativePackageNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +33,12 @@ public class AlternativePackageDAO {
             .flatMap(Set::stream)
             .collect(Collectors.toList());
 
-        alternativeDAO.addAlternatives(alternativePackageEntity, projectsAssessments, alternativePackage.getAlternativeList());
+        alternativeDAO.addAlternatives(alternativePackageEntity, projectsAssessments, alternativePackage.getAlternatives());
+    }
+
+    public AlternativePackageEntity getAlternativePackage(Long alternativePackageId) throws AlternativePackageNotFoundException {
+        return alternativePackageRepository
+            .findById(alternativePackageId)
+            .orElseThrow(AlternativePackageNotFoundException::new);
     }
 }

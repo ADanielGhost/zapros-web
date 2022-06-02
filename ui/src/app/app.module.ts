@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { NotFoundComponent } from './component/not-found/not-found.component';
 import {HttpClientModule} from "@angular/common/http";
 import {BackendService} from "./service/backend.service";
-import {UserService} from "./service/user.service";
 import { UserComponent } from './component/user/user.component';
 import { MainHeaderComponent } from './component/main-header/main-header.component';
 import { ProjectComponent } from './component/project/project.component';
 import { ProjectOneComponent } from './component/project-one/project-one.component';
+import { RegisterUserComponent } from './component/register-user/register-user.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { AskComponent } from './component/ask/ask.component';
 
 @NgModule({
   declarations: [
@@ -19,16 +21,19 @@ import { ProjectOneComponent } from './component/project-one/project-one.compone
     UserComponent,
     MainHeaderComponent,
     ProjectComponent,
-    ProjectOneComponent
+    ProjectOneComponent,
+    RegisterUserComponent,
+    AskComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
-    BackendService,
-    UserService
+    BackendService
   ],
   bootstrap: [AppComponent]
 })

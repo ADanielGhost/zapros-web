@@ -1,4 +1,4 @@
-package org.polytech.zaprosweb.entity;
+package org.polytech.zaprosweb.dao.entity;
 
 import java.util.Set;
 
@@ -12,7 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.polytech.zaprosweb.bean.Assessment;
+import org.polytech.zapros.bean.Assessment;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,8 +24,8 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-@Table(name = "Assessments")
-public class AssessmentEntity {
+@Table(name = "assessments")
+public class AssessmentEntity implements IEntity<Assessment> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -36,6 +36,9 @@ public class AssessmentEntity {
     @Column(nullable = false)
     private int rank;
 
+    @Column(nullable = false)
+    private int orderId;
+
     @ManyToOne
     @JoinColumn(name = "criteria_id", nullable = false)
     private CriteriaEntity criteria;
@@ -43,4 +46,9 @@ public class AssessmentEntity {
     @ManyToMany(mappedBy = "assessmentSet")
     @ToString.Exclude
     private Set<AlternativeEntity> alternative;
+
+    @Override
+    public Assessment toModel() {
+        return new Assessment(id, name, criteria.getId(), rank, orderId);
+    }
 }

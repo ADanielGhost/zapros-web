@@ -19,13 +19,13 @@
               <li>Кол-во критериев: {{project.criteriaList.length}}</li>
               <li>Кол-во оценок в критериях:
                 <span *ngFor="let criteria of project.criteriaList">
-                  {{criteria.name}} -> {{criteria.assessmentList.length}}
+                  {{criteria.name}} -> {{criteria.assessments.length}}
                 </span>
               </li>
-              <li>Кол-во наборов альтернатив: {{project.alternativePackageList.length}}</li>
+              <li>Кол-во наборов альтернатив: {{project.alternativePackages.length}}</li>
               <li>Кол-во альтернатив в наборах:
-                <span *ngFor="let alternativePackage of project.alternativePackageList">
-                  {{alternativePackage.name}} -> {{alternativePackage.alternativeList.length}}
+                <span *ngFor="let alternativePackage of project.alternativePackages">
+                  {{alternativePackage.name}} -> {{alternativePackage.alternatives.length}}
                 </span>
               </li>
             </ul>

@@ -1,4 +1,48 @@
-<p>project-one works!</p>
+<section class="jumbotron text-center my-3" *ngIf="this.currentProject">
+  <h1 class="jumbotron-heading">Проект "{{this.currentProject.name}}"</h1>
+</section>
 
-<h1 *ngIf="curProject">project: {{curProject.name}}</h1>
-<h1 *ngIf="!curProject">project: UNDEFINED</h1>
+<div class="d-flex" *ngIf="this.currentProject">
+  <div class="card mx-auto" style="width: 50%">
+    <div class="card">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <h4 class="my-1 text-center">Критерии:</h4>
+        </li>
+
+        <li class="list-group-item" *ngFor="let criteria of currentProject.criteriaList">
+          <h5>Критерий "{{criteria.name}}":</h5>
+          Оценки:
+          <div *ngFor="let assessment of criteria.assessments">
+            {{assessment.orderId}}: "{{assessment.name}}" -> {{assessment.rank}}
+          </div>
+        </li>
+
+        <li class="list-group-item">
+          <h4 class="my-1 text-center">Наборы альтернатив:</h4>
+        </li>
+
+        <li class="list-group-item" *ngFor="let alternativePackage of currentProject.alternativePackages">
+          <h5>
+            Набор "{{alternativePackage.name}}"<br>
+            Кол-во альтернатив: "{{alternativePackage.alternatives.length}}"<br>
+            Список альтернатив с оценками"
+          </h5>
+
+          <div *ngFor="let alternative of alternativePackage.alternatives">
+            "{{alternative.name}}":
+            <span *ngFor="let assessment of alternative.assessments">
+              {{assessment.name}}({{assessment.rank}})
+            </span>
+          </div>
+
+          <button type="button"
+                  class="btn btn-lg btn-block btn-outline-primary my-3"
+                  (click)="this.choosePackage(alternativePackage)">
+            Выбрать набор "{{alternativePackage.name}}"
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

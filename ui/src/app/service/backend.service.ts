@@ -18,6 +18,7 @@ export class BackendService {
   }
 
   public post<T>(url: string, body: any): Observable<T> {
-    return this._http.post<T>(this.backendHost + url, body, { responseType: 'text' as 'json'});
+    // return this._http.post<T>(this.backendHost + url, body, { responseType: 'text' as 'json'});
+    return this._http.post<T>(this.backendHost + url, body);
   }
 }

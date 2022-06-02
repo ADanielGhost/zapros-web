@@ -1,14 +1,13 @@
 package org.polytech.zaprosweb.dao;
 
+import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
-import org.polytech.zaprosweb.bean.Criteria;
+import org.polytech.zapros.bean.Criteria;
 import org.polytech.zaprosweb.dao.repository.CriteriaRepository;
-import org.polytech.zaprosweb.entity.*;
-import org.polytech.zaprosweb.util.IterableListUtils;
+import org.polytech.zaprosweb.dao.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,13 +20,16 @@ public class CriteriaDAO {
     @Autowired private AssessmentDAO assessmentDAO;
 
     public void addCriteriaList(ProjectEntity projectEntity, List<Criteria> criteriaList) {
-        criteriaList.forEach(criteria -> {
+        int current = 0;
+
+        for (Criteria criteria: criteriaList) {
             CriteriaEntity entity = new CriteriaEntity();
             entity.setName(criteria.getName());
+            entity.setOrderId(current++);
             entity.setProject(projectEntity);
 
             CriteriaEntity criteriaEntity = criteriaRepository.save(entity);
-            assessmentDAO.addAssessments(criteriaEntity, criteria.getAssessmentList());
-        });
+            assessmentDAO.addAssessments(criteriaEntity, criteria.getAssessments());
+        }
     }
 }
