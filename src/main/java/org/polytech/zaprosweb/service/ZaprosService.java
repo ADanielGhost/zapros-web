@@ -9,11 +9,13 @@ import javax.annotation.PostConstruct;
 import org.polytech.zapros.VdaZaprosFactory;
 import org.polytech.zapros.bean.Answer;
 import org.polytech.zapros.bean.AnswerCheckResult;
+import org.polytech.zapros.bean.BuildingQesCheckResult;
 import org.polytech.zapros.bean.MethodType;
 import org.polytech.zapros.service.main.VdaZaprosService;
 import org.polytech.zaprosweb.bean.AlternativePackage;
 import org.polytech.zaprosweb.bean.Project;
 import org.polytech.zaprosweb.bean.User;
+import org.polytech.zaprosweb.dao.AnswerDAO;
 import org.polytech.zaprosweb.dao.ProjectDAO;
 import org.polytech.zaprosweb.dao.UserDAO;
 import org.polytech.zaprosweb.dao.entity.UserEntity;
@@ -26,6 +28,7 @@ public class ZaprosService {
 
     @Autowired private UserDAO userDAO;
     @Autowired private ProjectDAO projectDAO;
+    @Autowired private AnswerDAO answerDAO;
 
     private Map<MethodType, VdaZaprosService> vdaZaprosServiceMap;
 
@@ -67,7 +70,39 @@ public class ZaprosService {
         return user.getAlternativePackage().getProject().toModel();
     }
 
-    public void sendAnswers(Long userId, List<Answer> answers) {
-        answers.forEach(System.out::println);
+    public void sendAnswers(Long userId, List<Answer> answers) throws UserNotFoundException {
+        UserEntity userEntity = identifyUser(userId);
+        answerDAO.sendAnswers(userEntity, answers);
+    }
+
+    public BuildingQesCheckResult checkValid(Long userId) throws UserNotFoundException {
+        UserEntity userEntity = identifyUser(userId);
+        User user = userEntity.toModel();
+        Project project = identifyProject(userEntity);
+        MethodType methodType = user.getMethodType();
+
+        System.out.println("checkValid!!!!");
+
+        BuildingQesCheckResult buildingQesCheckResult = vdaZaprosServiceMap.get(methodType).buildQes(
+            user.getAnswers(), project.getQuasiExpertConfig(),
+            project.getCriteriaList(), user.getThreshold()
+        );
+        System.out.println(buildingQesCheckResult);
+        return buildingQesCheckResult;
+    }
+
+    public BuildingQesCheckResult replaceAnswer(Long userId, BuildingQesCheckResult buildingQesCheckResult, Answer.AnswerType answerType) throws UserNotFoundException {
+        UserEntity userEntity = identifyUser(userId);
+        User user = userEntity.toModel();
+        Project project = identifyProject(userEntity);
+        MethodType methodType = user.getMethodType();
+
+        System.out.println(buildingQesCheckResult);
+        List<Answer> newAnswerList = vdaZaprosServiceMap.get(methodType).replaceAnswer(buildingQesCheckResult, answerType);
+
+        return vdaZaprosServiceMap.get(methodType).buildQes(
+            newAnswerList, project.getQuasiExpertConfig(),
+            project.getCriteriaList(), user.getThreshold()
+        );
     }
 }

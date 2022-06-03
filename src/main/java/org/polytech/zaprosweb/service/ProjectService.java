@@ -50,6 +50,7 @@ public class ProjectService {
 
     public User registerUser(Long alternativePackageId, User user) throws AlternativePackageNotFoundException {
         AlternativePackageEntity alternativePackageEntity = alternativePackageDAO.getAlternativePackage(alternativePackageId);
+        // check exists!!!
         return userDAO.registerUser(alternativePackageEntity, user).toModel();
     }
 

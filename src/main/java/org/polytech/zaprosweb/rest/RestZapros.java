@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.polytech.zapros.bean.Answer;
 import org.polytech.zapros.bean.AnswerCheckResult;
+import org.polytech.zapros.bean.BuildingQesCheckResult;
 import org.polytech.zaprosweb.exception.UserNotFoundException;
 import org.polytech.zaprosweb.service.ZaprosService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,19 @@ public class RestZapros {
     public void sendAnswers(@PathVariable("userId") Long userId,
                             @RequestBody List<Answer> answers) throws UserNotFoundException {
         zaprosService.sendAnswers(userId, answers);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/check/valid/{userId}", method = RequestMethod.GET)
+    public BuildingQesCheckResult checkValid(@PathVariable("userId") Long userId) throws UserNotFoundException {
+        return zaprosService.checkValid(userId);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/replace/answer/{userId}/{answerType}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public BuildingQesCheckResult replaceAnswer(@PathVariable("userId") Long userId,
+                                       @PathVariable("answerType") Answer.AnswerType answerType,
+                                       @RequestBody BuildingQesCheckResult buildingQesCheckResult) throws UserNotFoundException {
+        return zaprosService.replaceAnswer(userId, buildingQesCheckResult, answerType);
     }
 }

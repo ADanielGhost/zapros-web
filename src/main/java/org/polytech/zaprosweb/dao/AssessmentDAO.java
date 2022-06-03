@@ -31,4 +31,9 @@ public class AssessmentDAO {
             assessmentRepository.save(entity);
         }
     }
+
+    public AssessmentEntity getAssessmentById(Long id) {
+        return assessmentRepository.findById(id)
+            .orElseThrow(IllegalStateException::new);
+    }
 }

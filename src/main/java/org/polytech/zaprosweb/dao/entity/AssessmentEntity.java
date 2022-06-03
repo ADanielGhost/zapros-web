@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.polytech.zapros.bean.Assessment;
@@ -45,7 +46,17 @@ public class AssessmentEntity implements IEntity<Assessment> {
 
     @ManyToMany(mappedBy = "assessmentSet")
     @ToString.Exclude
-    private Set<AlternativeEntity> alternative;
+    private Set<AlternativeEntity> alternativeSet;
+
+    //ignore
+    @OneToMany(mappedBy = "i")
+    @ToString.Exclude
+    private Set<AnswerEntity> answersI;
+
+    //ignore
+    @OneToMany(mappedBy = "j")
+    @ToString.Exclude
+    private Set<AnswerEntity> answersJ;
 
     @Override
     public Assessment toModel() {

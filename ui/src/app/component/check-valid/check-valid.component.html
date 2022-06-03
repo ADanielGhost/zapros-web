@@ -1,27 +1,19 @@
-<div class="d-flex" *ngIf="!checkResult">
-  <button type="button"
-          class="btn btn-lg btn-block btn-outline-primary mx-auto"
-          (click)="askFirst()">
-    Как будете готовы отвечать, нажмите на эту кнопку
-  </button>
-</div>
-
 <div *ngIf="checkResult">
-  <section class="jumbotron text-center my-3" *ngIf="!checkResult.over">
-    <h1 class="jumbotron-heading">{{textCompare}}</h1>
-  </section>
-
   <section class="jumbotron text-center my-3" *ngIf="checkResult.over">
-    <h1 class="jumbotron-heading">Основной этап опроса завершен!</h1>
+    <h1 class="jumbotron-heading">Противоречий не обнаружено!</h1>
   </section>
 
   <div class="d-flex" *ngIf="checkResult.over">
     <button type="button"
             class="btn btn-lg btn-block btn-outline-primary mx-auto"
-            (click)="sendAnswers()">
-      Сохранить ответы и перейти к проверке на противоречивость
+            (click)="rankAlternatives()">
+      Перейти к ранжированию альтернатив
     </button>
   </div>
+
+  <section class="jumbotron text-center my-3" *ngIf="!checkResult.over">
+    <h1 class="jumbotron-heading">Обраружены противоречия!</h1>
+  </section>
 
   <div class="d-flex" *ngIf="!checkResult.over">
     <div class="card mx-auto" style="width: 50%">
@@ -35,7 +27,7 @@
               <button type="button"
                       class="btn btn-lg btn-block btn-outline-primary mx-auto"
                       style="width: 50%"
-                      (click)="addAnswer('BETTER')">
+                      (click)="replaceAnswer('BETTER')">
                 BETTER
               </button>
             </div>
@@ -46,7 +38,7 @@
               <button type="button"
                       class="btn btn-lg btn-block btn-outline-primary mx-auto"
                       style="width: 50%"
-                      (click)="addAnswer('WORSE')">
+                      (click)="replaceAnswer('WORSE')">
                 WORSE
               </button>
             </div>
@@ -57,7 +49,7 @@
               <button type="button"
                       class="btn btn-lg btn-block btn-outline-primary mx-auto"
                       style="width: 50%"
-                      (click)="addAnswer('EQUAL')">
+                      (click)="replaceAnswer('EQUAL')">
                 EQUAL
               </button>
             </div>

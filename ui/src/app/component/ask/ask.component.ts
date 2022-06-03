@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ProjectService} from "../../service/project.service";
 import {ZaprosService} from "../../service/zapros.service";
 import {AnswerCheckResult} from "../../type/answer-check-result";
@@ -29,6 +29,7 @@ export class AskComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private _projectService: ProjectService,
     private _zaprosService: ZaprosService
   ) {
@@ -77,7 +78,8 @@ export class AskComponent implements OnInit {
 
   sendAnswers() {
     if (!this.checkResult || !this.checkResult.over) return;
-    this._zaprosService.sendAnswers(this.userId, this.checkResult.answerList).subscribe();
-    this.textCompare = 'DONE';
+    this._zaprosService.sendAnswers(this.userId, this.checkResult.answerList).subscribe(() => {
+      this.router.navigate(['/check/valid', this.userId]);
+    });
   }
 }
