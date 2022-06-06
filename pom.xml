@@ -12,7 +12,7 @@
 
 	<groupId>org.polytech</groupId>
 	<artifactId>zapros-web</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-demo</version>
 
 	<name>zapros-web</name>
 	<description>Implementation ZAPROS methods</description>
@@ -64,7 +64,7 @@
 		<dependency>
 			<groupId>org.polytech</groupId>
 			<artifactId>vda-zapros</artifactId>
-			<version>1.7.3</version>
+			<version>1.8.0</version>
 		</dependency>
 
 		<dependency>

@@ -31,7 +31,7 @@
     <div class="card mx-auto" style="width: 50%">
       <div class="card">
         <div class="card-header text-center">
-          {{textChoose}}
+          <h5>{{textChoose}}</h5>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
@@ -40,7 +40,7 @@
                       class="btn btn-lg btn-block btn-outline-primary mx-auto"
                       style="width: 50%"
                       (click)="addAnswer('BETTER')">
-                BETTER
+                ПЕРВАЯ альтернатива предпочтительнее
               </button>
             </div>
           </li>
@@ -51,7 +51,7 @@
                       class="btn btn-lg btn-block btn-outline-primary mx-auto"
                       style="width: 50%"
                       (click)="addAnswer('WORSE')">
-                WORSE
+                ВТОРАЯ альтернатива предпочтительнее
               </button>
             </div>
           </li>
@@ -62,7 +62,7 @@
                       class="btn btn-lg btn-block btn-outline-primary mx-auto"
                       style="width: 50%"
                       (click)="addAnswer('EQUAL')">
-                EQUAL
+                Они для меня представляют ОДИНАКОВУЮ ценность
               </button>
             </div>
           </li>
