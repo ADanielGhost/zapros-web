@@ -3,7 +3,7 @@
 ></app-alert>
 
 <div *ngIf="checkResult">
-  <section class="jumbotron text-center my-3" *ngIf="checkResult.over">
+  <section class="jumbotron text-center m-4" *ngIf="checkResult.over">
     <h1 class="jumbotron-heading">Противоречий не обнаружено!</h1>
   </section>
 
@@ -15,11 +15,11 @@
     </button>
   </div>
 
-  <section class="jumbotron text-center my-3" *ngIf="!checkResult.over">
+  <section class="jumbotron text-center m-4" *ngIf="!checkResult.over">
     <h1 class="jumbotron-heading">Обраружены противоречия!</h1>
   </section>
 
-  <div class="d-flex" *ngIf="!checkResult.over">
+  <div class="d-flex d-flex py-4 bg-light" *ngIf="!checkResult.over">
     <div class="card mx-auto" style="width: 50%">
       <div class="card">
         <div class="card-header text-center">

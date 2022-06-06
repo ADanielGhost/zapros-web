@@ -144,14 +144,12 @@ public class ZaprosService {
         UserEntity userEntity = identifyUser(userId);
         Project project = identifyProject(userEntity);
         AlternativePackage alternativePackage = identifyAlternativePackage(userEntity);
-        User user = userEntity.toModel();
-        MethodType methodType = user.getMethodType();
 
         List<QuasiExpert> quasiExperts = userEntity.getQuasiExpertSet().stream()
             .map(QuasiExpertEntity::toModel)
             .collect(Collectors.toList());
 
-        if (user.getMethodType() == MethodType.ZAPROS_II || user.getMethodType() == MethodType.ZAPROS_III) {
+        if (userEntity.getMethodType() == MethodType.ZAPROS_II || userEntity.getMethodType() == MethodType.ZAPROS_III) {
             List<? extends AlternativeResult> resultsZaprosII = vdaZaprosServiceMap.get(MethodType.ZAPROS_II).rankAlternatives(
                 quasiExperts, alternativePackage.getAlternatives(),
                 project.getCriteriaList(), project.getQuasiExpertConfig()
@@ -162,7 +160,7 @@ public class ZaprosService {
                 project.getCriteriaList(), project.getQuasiExpertConfig()
             );
 
-            return new FullAlternativeResult(resultsZaprosII, resultsZaprosIII);
+            return new FullAlternativeResult(userEntity.getMethodType(), resultsZaprosII, resultsZaprosIII);
         }
 
         // ARACE and ARACE_QV
@@ -176,7 +174,7 @@ public class ZaprosService {
             project.getCriteriaList(), project.getQuasiExpertConfig()
         );
 
-        return new FullAlternativeResult(resultsArace, resultsAraceQV);
+        return new FullAlternativeResult(userEntity.getMethodType(), resultsArace, resultsAraceQV);
     }
 
     public QuasiExpert getQes(Long quasiExpertId) {

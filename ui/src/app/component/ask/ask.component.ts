@@ -83,7 +83,7 @@ export class AskComponent implements OnInit {
   sendAnswers() {
     if (!this.checkResult || !this.checkResult.over) return;
     this._zaprosService.sendAnswers(this.userId, this.checkResult.answerList).subscribe(() => {
-      this.router.navigate(['view/result/:id', this.userId]);
+      this.router.navigate(['/check/valid', this.userId]);
     });
   }
 }

@@ -11,15 +11,15 @@
 ></app-alert>
 
 <div *ngIf="checkResult">
-  <section class="jumbotron text-center my-3" *ngIf="!checkResult.over">
+  <section class="jumbotron text-center m-4" *ngIf="!checkResult.over">
     <h1 class="jumbotron-heading">{{textCompare}}</h1>
   </section>
 
-  <section class="jumbotron text-center my-3" *ngIf="checkResult.over">
+  <section class="jumbotron text-center m-4" *ngIf="checkResult.over">
     <h1 class="jumbotron-heading">Основной этап опроса завершен!</h1>
   </section>
 
-  <div class="d-flex" *ngIf="checkResult.over">
+  <div class="d-flex py-4 bg-light" *ngIf="checkResult.over">
     <button type="button"
             class="btn btn-lg btn-block btn-outline-primary mx-auto"
             (click)="sendAnswers()">
@@ -27,7 +27,7 @@
     </button>
   </div>
 
-  <div class="d-flex" *ngIf="!checkResult.over">
+  <div class="d-flex py-4 bg-light" *ngIf="!checkResult.over">
     <div class="card mx-auto" style="width: 50%">
       <div class="card">
         <div class="card-header text-center">

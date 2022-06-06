@@ -1,8 +1,21 @@
-<section class="jumbotron text-center m-1">
+<section class="jumbotron text-center m-4">
   <h1 class="jumbotron-heading">Регистрация юзера</h1>
+  <div class="container">
+    <p class="lead text-muted">
+      В данной программе нету авторизации, так что для каждой партии ответов создается новый пользователь
+    </p>
+    <p class="lead text-muted">
+      Методы ZAPROS_II и ZAPROS_III, а так же ARACE и ARACE_QV требуют для ранжирования одинаковые данные.<br>
+      Разница в том, что ZAPROS_II и ARACE считают на порядковых шкалах, а ZAPROS_III и ARACE_QV - на интервальных
+    </p>
+    <p class="lead text-muted">
+      Threshold позволяет задать допустимый порог противоречий (актуально только для ARACE и ARACE_QV).<br>
+      По умолчанию 0,25
+    </p>
+  </div>
 </section>
 
-<div class="d-flex">
+<div class="d-flex bg-light">
   <div class="mx-auto" style="width: 50%">
     <form [formGroup]="registrationForm" (submit)="sendToBack()" novalidate>
       <div class="form-group my-3">

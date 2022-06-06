@@ -53,7 +53,7 @@ export class CheckValidComponent implements OnInit {
   }
 
   rankAlternatives() {
-    this.router.navigate(['/view/result/:id', this.userId]);
+    this.router.navigate(['/view/result', this.userId]);
   }
 
   replaceAnswer(type: string) {

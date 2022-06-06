@@ -1,8 +1,14 @@
-<section class="jumbotron text-center my-3" *ngIf="this.currentProject">
+<section class="jumbotron text-center m-4" *ngIf="this.currentProject">
   <h1 class="jumbotron-heading">Проект "{{this.currentProject.name}}"</h1>
+  <div class="container">
+    <p class="lead text-muted">
+      Снизу перечислены критерии с оценками, а также наборы альтернатив<br>
+      Для желаемого набора просто нажмите на кнопку - и вы перейдете к построению вопросов
+    </p>
+  </div>
 </section>
 
-<div class="d-flex" *ngIf="this.currentProject">
+<div class="d-flex py-5 bg-light" *ngIf="this.currentProject">
   <div class="card mx-auto" style="width: 50%">
     <div class="card">
       <ul class="list-group list-group-flush">
@@ -11,10 +17,10 @@
         </li>
 
         <li class="list-group-item" *ngFor="let criteria of currentProject.criteriaList">
-          <h5>Критерий "{{criteria.name}}":</h5>
-          Оценки:
+          <h5>Критерий "{{criteria.name}}", номер {{criteria.orderId}}:</h5>
+          Оценки (имя, ранг):
           <div *ngFor="let assessment of criteria.assessments">
-            {{assessment.orderId}}: "{{assessment.name}}" -> {{assessment.rank}}
+            "{{assessment.name}}": {{assessment.rank}}, номер {{assessment.orderId}}
           </div>
         </li>
 
@@ -25,8 +31,8 @@
         <li class="list-group-item" *ngFor="let alternativePackage of currentProject.alternativePackages">
           <h5>
             Набор "{{alternativePackage.name}}"<br>
-            Кол-во альтернатив: "{{alternativePackage.alternatives.length}}"<br>
-            Список альтернатив с оценками"
+            Кол-во альтернатив: {{alternativePackage.alternatives.length}}<br>
+            Список альтернатив с оценками и рангами:
           </h5>
 
           <div *ngFor="let alternative of alternativePackage.alternatives">

@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {AnswerCheckResult} from "../type/answer-check-result";
 import {Answer, AnswerType} from "../type/answer";
 import {BuildingQesCheckResult} from "../type/building-qes-check-result";
+import {FullAlternativeResult} from "../type/full-alternative-result";
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,9 @@ export class ZaprosService {
 
   replaceAnswer(userId: number, answerType: AnswerType, checkResult: BuildingQesCheckResult): Observable<BuildingQesCheckResult> {
     return this._backendService.post<BuildingQesCheckResult>(this.mapping + `/replace/answer/${userId}/${answerType}`, checkResult);
+  }
+
+  rankAlternatives(userId: number): Observable<FullAlternativeResult> {
+    return this._backendService.get<FullAlternativeResult>(this.mapping + `/rank/alternatives/${userId}`);
   }
 }
