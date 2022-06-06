@@ -22,6 +22,8 @@ export class CheckValidComponent implements OnInit {
 
   public textChoose: string | undefined;
 
+  public needAlert: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -33,7 +35,9 @@ export class CheckValidComponent implements OnInit {
     this._zaprosService.checkValid(this.userId).subscribe(x => {
       this.checkResult = x;
       this.initTextForCorrectingAnswer();
-    })
+    }, () => {
+      this.needAlert = true;
+    });
   }
 
   private initTextForCorrectingAnswer() {
@@ -49,7 +53,7 @@ export class CheckValidComponent implements OnInit {
   }
 
   rankAlternatives() {
-    console.log('rankAlternatives!');
+    this.router.navigate(['/view/result/:id', this.userId]);
   }
 
   replaceAnswer(type: string) {

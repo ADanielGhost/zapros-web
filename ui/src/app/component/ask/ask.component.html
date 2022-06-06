@@ -6,6 +6,10 @@
   </button>
 </div>
 
+<app-alert *ngIf="needAlert"
+  [text]="'Юзер с таким id уже отвечал на вопросы!'"
+></app-alert>
+
 <div *ngIf="checkResult">
   <section class="jumbotron text-center my-3" *ngIf="!checkResult.over">
     <h1 class="jumbotron-heading">{{textCompare}}</h1>

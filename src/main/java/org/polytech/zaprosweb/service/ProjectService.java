@@ -2,8 +2,8 @@ package org.polytech.zaprosweb.service;
 
 import java.util.List;
 
-import org.apache.juli.logging.Log;
-import org.apache.juli.logging.LogFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.polytech.zaprosweb.bean.AlternativePackage;
 import org.polytech.zaprosweb.bean.Project;
 import org.polytech.zaprosweb.bean.User;
@@ -50,7 +50,6 @@ public class ProjectService {
 
     public User registerUser(Long alternativePackageId, User user) throws AlternativePackageNotFoundException {
         AlternativePackageEntity alternativePackageEntity = alternativePackageDAO.getAlternativePackage(alternativePackageId);
-        // check exists!!!
         return userDAO.registerUser(alternativePackageEntity, user).toModel();
     }
 

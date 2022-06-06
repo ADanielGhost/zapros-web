@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.polytech.zapros.bean.Answer;
+import org.polytech.zapros.bean.ReplacedAnswer;
 import org.polytech.zaprosweb.dao.entity.AnswerEntity;
 import org.polytech.zaprosweb.dao.entity.AssessmentEntity;
 import org.polytech.zaprosweb.dao.entity.UserEntity;
@@ -16,6 +17,10 @@ public class AnswerDAO {
 
     @Autowired private AnswerRepository answerRepository;
     @Autowired private AssessmentDAO assessmentDAO;
+
+    public boolean answersAlreadyExists(Long userId) {
+        return answerRepository.findByUserId(userId).size() != 0;
+    }
 
     public void sendAnswers(UserEntity userEntity, List<Answer> answers) {
         List<AnswerEntity> entities = answers.stream()
@@ -35,5 +40,14 @@ public class AnswerDAO {
             }).collect(Collectors.toList());
 
         answerRepository.saveAll(entities);
+    }
+
+    public void replaceAnswer(long id, Answer newAnswer) {
+        AnswerEntity entity = answerRepository.findById(id).orElseThrow(IllegalStateException::new);
+
+        entity.setAnswerType(newAnswer.getAnswerType());
+        entity.setAnswerAuthor(newAnswer.getAnswerAuthor());
+
+        answerRepository.save(entity);
     }
 }

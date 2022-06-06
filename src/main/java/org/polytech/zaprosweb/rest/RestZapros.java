@@ -5,6 +5,11 @@ import java.util.List;
 import org.polytech.zapros.bean.Answer;
 import org.polytech.zapros.bean.AnswerCheckResult;
 import org.polytech.zapros.bean.BuildingQesCheckResult;
+import org.polytech.zapros.bean.QuasiExpert;
+import org.polytech.zaprosweb.bean.BuildingQesCheckResultWrapper;
+import org.polytech.zaprosweb.bean.FullAlternativeResult;
+import org.polytech.zaprosweb.exception.AnswersAlreadyExistsException;
+import org.polytech.zaprosweb.exception.QesAlreadyExistsException;
 import org.polytech.zaprosweb.exception.UserNotFoundException;
 import org.polytech.zaprosweb.service.ZaprosService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +31,7 @@ public class RestZapros {
 
     @ResponseBody
     @RequestMapping(value = "/ask/first/{userId}", method = RequestMethod.GET)
-    public AnswerCheckResult askFirst(@PathVariable("userId") Long userId) throws UserNotFoundException {
+    public AnswerCheckResult askFirst(@PathVariable("userId") Long userId) throws UserNotFoundException, AnswersAlreadyExistsException {
         return zaprosService.askFirst(userId);
     }
 
@@ -47,15 +52,27 @@ public class RestZapros {
 
     @ResponseBody
     @RequestMapping(value = "/check/valid/{userId}", method = RequestMethod.GET)
-    public BuildingQesCheckResult checkValid(@PathVariable("userId") Long userId) throws UserNotFoundException {
+    public BuildingQesCheckResult checkValid(@PathVariable("userId") Long userId) throws UserNotFoundException, QesAlreadyExistsException {
         return zaprosService.checkValid(userId);
     }
 
     @ResponseBody
     @RequestMapping(value = "/replace/answer/{userId}/{answerType}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public BuildingQesCheckResult replaceAnswer(@PathVariable("userId") Long userId,
-                                       @PathVariable("answerType") Answer.AnswerType answerType,
-                                       @RequestBody BuildingQesCheckResult buildingQesCheckResult) throws UserNotFoundException {
-        return zaprosService.replaceAnswer(userId, buildingQesCheckResult, answerType);
+                                                @PathVariable("answerType") Answer.AnswerType answerType,
+                                                @RequestBody BuildingQesCheckResultWrapper buildingQesCheckResult) throws UserNotFoundException, QesAlreadyExistsException {
+        return zaprosService.replaceAnswer(userId, buildingQesCheckResult.unwrap(), answerType);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/qes/{quasiExpertId}", method = RequestMethod.GET)
+    public QuasiExpert getQuasiExpert(@PathVariable("quasiExpertId") Long quasiExpertId) {
+        return zaprosService.getQes(quasiExpertId);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/rank/alternatives/{userId}", method = RequestMethod.GET)
+    public FullAlternativeResult rankAlternatives(@PathVariable("userId") Long userId) throws UserNotFoundException {
+        return zaprosService.rankAlternatives(userId);
     }
 }

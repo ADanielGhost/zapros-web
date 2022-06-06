@@ -6,6 +6,7 @@ import { ProjectOneComponent } from './component/project-one/project-one.compone
 import {RegisterUserComponent} from "./component/register-user/register-user.component";
 import {AskComponent} from "./component/ask/ask.component";
 import {CheckValidComponent} from "./component/check-valid/check-valid.component";
+import {ViewResultComponent} from "./component/view-result/view-result.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/projects', pathMatch: 'full'},
@@ -14,8 +15,9 @@ const routes: Routes = [
   {path: 'new/user/:id', component: RegisterUserComponent},
   {path: 'ask/:id', component: AskComponent},
   {path: 'check/valid/:id', component: CheckValidComponent},
-  {path: 'second', redirectTo: '/projects', pathMatch: 'full'}, // second/kek/kek doesn't allowed
-  {path: 'third', redirectTo: '/projects', pathMatch: 'prefix'}, // third/lol/kek allowed
+  {path: 'view/result/:id', component: ViewResultComponent},
+  // {path: 'second', redirectTo: '/projects', pathMatch: 'full'}, // second/kek/kek doesn't allowed
+  // {path: 'third', redirectTo: '/projects', pathMatch: 'prefix'}, // third/lol/kek allowed
   {path: '**', redirectTo: '/not-found', pathMatch: 'full'},
   {path: 'not-found', component: NotFoundComponent}
 ];

@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 import org.polytech.zapros.bean.QuasiExpertConfig;
 import org.polytech.zaprosweb.dao.converter.ListInteger2StringConverter;
-import org.polytech.zaprosweb.dao.converter.Matrix2StringConverter;
+import org.polytech.zaprosweb.dao.converter.BinaryMatrix2StringConverter;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,7 +40,7 @@ public class QuasiExpertConfigEntity implements IEntity<QuasiExpertConfig> {
     private List<Integer> indexes;
 
     @Column(nullable = false)
-    @Convert(converter = Matrix2StringConverter.class)
+    @Convert(converter = BinaryMatrix2StringConverter.class)
     private int[][] initData;
 
     @OneToOne

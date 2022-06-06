@@ -3,7 +3,6 @@ package org.polytech.zaprosweb.dao;
 import org.polytech.zapros.bean.MethodType;
 import org.polytech.zaprosweb.bean.User;
 import org.polytech.zaprosweb.dao.entity.AlternativePackageEntity;
-import org.polytech.zaprosweb.dao.entity.IEntity;
 import org.polytech.zaprosweb.dao.entity.ProjectEntity;
 import org.polytech.zaprosweb.dao.entity.UserEntity;
 import org.polytech.zaprosweb.dao.repository.UserRepository;

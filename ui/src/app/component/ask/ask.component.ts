@@ -27,6 +27,8 @@ export class AskComponent implements OnInit {
   public textCompare: string | undefined;
   public textChoose: string | undefined;
 
+  public needAlert: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -46,6 +48,8 @@ export class AskComponent implements OnInit {
     this._zaprosService.askFirst(this.userId).subscribe(x => {
       this.checkResult = x;
       this.initDataForAsking();
+    }, () => {
+      this.needAlert = true;
     });
   }
 
@@ -79,7 +83,7 @@ export class AskComponent implements OnInit {
   sendAnswers() {
     if (!this.checkResult || !this.checkResult.over) return;
     this._zaprosService.sendAnswers(this.userId, this.checkResult.answerList).subscribe(() => {
-      this.router.navigate(['/check/valid', this.userId]);
+      this.router.navigate(['view/result/:id', this.userId]);
     });
   }
 }

@@ -1,5 +1,6 @@
 package org.polytech.zaprosweb.dao.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -46,17 +47,22 @@ public class AssessmentEntity implements IEntity<Assessment> {
 
     @ManyToMany(mappedBy = "assessmentSet")
     @ToString.Exclude
-    private Set<AlternativeEntity> alternativeSet;
+    private Set<AlternativeEntity> alternativeSet = new HashSet<>();
 
     //ignore
     @OneToMany(mappedBy = "i")
     @ToString.Exclude
-    private Set<AnswerEntity> answersI;
+    private Set<AnswerEntity> answersI = new HashSet<>();
 
     //ignore
     @OneToMany(mappedBy = "j")
     @ToString.Exclude
-    private Set<AnswerEntity> answersJ;
+    private Set<AnswerEntity> answersJ = new HashSet<>();
+
+    //ignore
+    @OneToMany(mappedBy = "assessment")
+    @ToString.Exclude
+    private Set<RankEntity> ranks = new HashSet<>();
 
     @Override
     public Assessment toModel() {

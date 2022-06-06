@@ -1,3 +1,7 @@
+<app-alert *ngIf="needAlert"
+           [text]="'Вы уже исправили все противоречия!'"
+></app-alert>
+
 <div *ngIf="checkResult">
   <section class="jumbotron text-center my-3" *ngIf="checkResult.over">
     <h1 class="jumbotron-heading">Противоречий не обнаружено!</h1>

@@ -51,6 +51,9 @@ public class AnswerEntity implements IEntity<Answer> {
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
+    @OneToOne(mappedBy = "firstAnswer")
+    private QuasiExpertEntity quasiExpert;
+
     @Override
     public Answer toModel() {
         Answer answer = new Answer(i.toModel(), j.toModel(), answerType, answerAuthor);
