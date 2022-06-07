@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
 
-  private backendHost: string = "http://localhost:8090";
+  private backendHost: string = environment.production ? "https://zapros-web.herokuapp.com" : "http://localhost:8090";
 
   constructor(
     private _http: HttpClient
