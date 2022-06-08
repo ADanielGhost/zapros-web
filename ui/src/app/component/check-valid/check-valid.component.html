@@ -1,5 +1,7 @@
+<app-loading *ngIf="!isDataLoad"></app-loading>
+
 <app-alert *ngIf="needAlert"
-           [text]="'Вы уже исправили все противоречия!'"
+           [text]="'Вы уже исправляли противоречия! Напишите мне! Тут может быть неприятный баг :('"
 ></app-alert>
 
 <div *ngIf="checkResult">

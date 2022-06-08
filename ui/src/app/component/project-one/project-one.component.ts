@@ -12,6 +12,7 @@ import {AlternativePackage} from "../../type/alternative-package";
 export class ProjectOneComponent implements OnInit {
 
   public currentProject: Project | undefined;
+  public isDataLoad: boolean = false;
 
   constructor(
     private _projectService: ProjectService,
@@ -24,9 +25,7 @@ export class ProjectOneComponent implements OnInit {
     const id = parseInt(<string> this.route.snapshot.paramMap.get('id'));
     this._projectService.getProjectById(id).subscribe(x => {
       this.currentProject = x;
-      console.log(x);
-      console.log(x.id);
-      console.log(x.name);
+      this.isDataLoad = true;
     });
   }
 

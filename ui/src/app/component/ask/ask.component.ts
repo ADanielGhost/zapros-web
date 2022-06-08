@@ -28,6 +28,7 @@ export class AskComponent implements OnInit {
   public textChoose: string | undefined;
 
   public needAlert: boolean = false;
+  public isDataLoad: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,15 +40,14 @@ export class AskComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this._projectService.getUserById(this.userId).subscribe(x => {
-    //   this.user = x;
-    // })
   }
 
   askFirst() {
+    this.isDataLoad = false;
     this._zaprosService.askFirst(this.userId).subscribe(x => {
       this.checkResult = x;
       this.initDataForAsking();
+      this.isDataLoad = true;
     }, () => {
       this.needAlert = true;
     });
@@ -56,9 +56,11 @@ export class AskComponent implements OnInit {
   addAnswer(type: string) {
     if (!this.checkResult) return;
 
+    this.isDataLoad = false;
     this._zaprosService.addAnswer(this.userId, <AnswerType> type, this.checkResult).subscribe(x => {
       this.checkResult = x;
       this.initDataForAsking();
+      this.isDataLoad = true;
     });
   }
 
@@ -82,6 +84,8 @@ export class AskComponent implements OnInit {
 
   sendAnswers() {
     if (!this.checkResult || !this.checkResult.over) return;
+
+    this.isDataLoad = false;
     this._zaprosService.sendAnswers(this.userId, this.checkResult.answerList).subscribe(() => {
       this.router.navigate(['/check/valid', this.userId]);
     });

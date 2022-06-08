@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 export class ProjectComponent implements OnInit {
 
   public projects: Project[] | undefined;
+  public isDataLoad: boolean = false;
 
   constructor(
     private _projectService: ProjectService,
@@ -20,6 +21,7 @@ export class ProjectComponent implements OnInit {
   ngOnInit() {
     this._projectService.getAllProjects().subscribe(projects => {
       this.projects = projects;
+      this.isDataLoad = true;
     });
   }
 

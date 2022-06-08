@@ -39,6 +39,7 @@ export class RegisterUserComponent implements OnInit {
   sendToBack() {
     const data = this.registrationForm.value;
     this.needAlert = false;
+    this.textAlert = 'Ошибка!';
 
     if (data.name.length == 0) {
       this.needAlert = true;

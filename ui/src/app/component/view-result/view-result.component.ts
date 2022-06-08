@@ -14,6 +14,7 @@ export class ViewResultComponent implements OnInit {
   public userId: number;
   // @ts-ignore
   public fullAlternativeResult: FullAlternativeResult;
+  public isDataLoad: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,6 +26,7 @@ export class ViewResultComponent implements OnInit {
     this.userId = parseInt(<string> this.route.snapshot.paramMap.get('id'));
     this._zaprosService.getRankAlternatives(this.userId).subscribe(x => {
       this.fullAlternativeResult = x;
+      this.isDataLoad = true;
     });
   }
 }

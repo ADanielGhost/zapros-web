@@ -23,6 +23,7 @@ export class CheckValidComponent implements OnInit {
   public textChoose: string | undefined;
 
   public needAlert: boolean = false;
+  public isDataLoad: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,6 +36,7 @@ export class CheckValidComponent implements OnInit {
     this._zaprosService.checkValid(this.userId).subscribe(x => {
       this.checkResult = x;
       this.initTextForCorrectingAnswer();
+      this.isDataLoad = true;
     }, () => {
       this.needAlert = true;
     });
@@ -54,6 +56,7 @@ export class CheckValidComponent implements OnInit {
   }
 
   rankAlternatives() {
+    this.isDataLoad = false;
     this._zaprosService.rankAlternatives(this.userId).subscribe(() => {
       this.router.navigate(['/view/result', this.userId]);
     });
@@ -62,9 +65,11 @@ export class CheckValidComponent implements OnInit {
   replaceAnswer(type: string) {
     if (!this.checkResult) return;
 
+    this.isDataLoad = false;
     this._zaprosService.replaceAnswer(this.userId, <AnswerType> type, this.checkResult).subscribe(x => {
       this.checkResult = x;
       this.initTextForCorrectingAnswer();
+      this.isDataLoad = true;
     });
   }
 }
