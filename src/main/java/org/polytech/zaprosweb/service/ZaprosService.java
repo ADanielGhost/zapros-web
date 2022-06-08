@@ -1,5 +1,6 @@
 package org.polytech.zaprosweb.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import javax.annotation.PostConstruct;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.polytech.zapros.VdaZaprosFactory;
+import org.polytech.zapros.bean.Alternative;
 import org.polytech.zapros.bean.Answer;
 import org.polytech.zapros.bean.AnswerCheckResult;
 import org.polytech.zapros.bean.BuildingQesCheckResult;
@@ -18,13 +20,15 @@ import org.polytech.zapros.bean.MethodType;
 import org.polytech.zapros.bean.QuasiExpert;
 import org.polytech.zapros.bean.QuasiExpertConfig;
 import org.polytech.zapros.bean.ReplacedAnswer;
-import org.polytech.zapros.bean.alternative.AlternativeResult;
+import org.polytech.zapros.bean.alternative.AlternativeRankingResult;
 import org.polytech.zapros.service.main.VdaZaprosService;
 import org.polytech.zaprosweb.bean.AlternativePackage;
+import org.polytech.zaprosweb.bean.AlternativeWebRankingResult;
 import org.polytech.zaprosweb.bean.FullAlternativeResult;
 import org.polytech.zaprosweb.bean.Project;
 import org.polytech.zaprosweb.bean.User;
 import org.polytech.zaprosweb.dao.AnswerDAO;
+import org.polytech.zaprosweb.dao.FullAlternativeResultDAO;
 import org.polytech.zaprosweb.dao.ProjectDAO;
 import org.polytech.zaprosweb.dao.QuasiExpertDAO;
 import org.polytech.zaprosweb.dao.UserDAO;
@@ -43,6 +47,7 @@ public class ZaprosService {
     @Autowired private ProjectDAO projectDAO;
     @Autowired private AnswerDAO answerDAO;
     @Autowired private QuasiExpertDAO quasiExpertDAO;
+    @Autowired private FullAlternativeResultDAO fullAlternativeResultDAO;
 
     private final Log log = LogFactory.getLog(this.getClass());
 
@@ -140,7 +145,7 @@ public class ZaprosService {
         );
     }
 
-    public FullAlternativeResult rankAlternatives(Long userId) throws UserNotFoundException {
+    public void rankAlternatives(Long userId) throws UserNotFoundException {
         UserEntity userEntity = identifyUser(userId);
         Project project = identifyProject(userEntity);
         AlternativePackage alternativePackage = identifyAlternativePackage(userEntity);
@@ -149,35 +154,65 @@ public class ZaprosService {
             .map(QuasiExpertEntity::toModel)
             .collect(Collectors.toList());
 
+        AlternativeRankingResult resultsOrder;
+        AlternativeRankingResult resultsQV;
         if (userEntity.getMethodType() == MethodType.ZAPROS_II || userEntity.getMethodType() == MethodType.ZAPROS_III) {
-            List<? extends AlternativeResult> resultsZaprosII = vdaZaprosServiceMap.get(MethodType.ZAPROS_II).rankAlternatives(
-                quasiExperts, alternativePackage.getAlternatives(),
+            // ZAPROS II and ZAPROS III
+            resultsOrder = vdaZaprosServiceMap.get(MethodType.ZAPROS_II).rankAlternatives(
+                quasiExperts, getDeepCopyAlternatives(alternativePackage.getAlternatives()),
                 project.getCriteriaList(), project.getQuasiExpertConfig()
             );
 
-            List<? extends AlternativeResult> resultsZaprosIII = vdaZaprosServiceMap.get(MethodType.ZAPROS_III).rankAlternatives(
-                quasiExperts, alternativePackage.getAlternatives(),
+            resultsQV = vdaZaprosServiceMap.get(MethodType.ZAPROS_III).rankAlternatives(
+                quasiExperts, getDeepCopyAlternatives(alternativePackage.getAlternatives()),
+                project.getCriteriaList(), project.getQuasiExpertConfig()
+            );
+        } else {
+            // ARACE and ARACE_QV
+            resultsOrder = vdaZaprosServiceMap.get(MethodType.ARACE).rankAlternatives(
+                quasiExperts, getDeepCopyAlternatives(alternativePackage.getAlternatives()),
                 project.getCriteriaList(), project.getQuasiExpertConfig()
             );
 
-            return new FullAlternativeResult(userEntity.getMethodType(), resultsZaprosII, resultsZaprosIII);
+            resultsQV = vdaZaprosServiceMap.get(MethodType.ARACE_QV).rankAlternatives(
+                quasiExperts, getDeepCopyAlternatives(alternativePackage.getAlternatives()),
+                project.getCriteriaList(), project.getQuasiExpertConfig()
+            );
         }
 
-        // ARACE and ARACE_QV
-        List<? extends AlternativeResult> resultsArace = vdaZaprosServiceMap.get(MethodType.ARACE).rankAlternatives(
-            quasiExperts, alternativePackage.getAlternatives(),
-            project.getCriteriaList(), project.getQuasiExpertConfig()
+        FullAlternativeResult fullAlternativeResult = new FullAlternativeResult(
+            userEntity.getMethodType(),
+            AlternativeWebRankingResult.of(resultsOrder),
+            AlternativeWebRankingResult.of(resultsQV)
         );
 
-        List<? extends AlternativeResult> resultsAraceQV = vdaZaprosServiceMap.get(MethodType.ARACE_QV).rankAlternatives(
-            quasiExperts, alternativePackage.getAlternatives(),
-            project.getCriteriaList(), project.getQuasiExpertConfig()
-        );
+        System.out.println(fullAlternativeResult);
+        fullAlternativeResultDAO.saveFullAlternativeResults(userEntity, fullAlternativeResult);
+    }
 
-        return new FullAlternativeResult(userEntity.getMethodType(), resultsArace, resultsAraceQV);
+    private List<Alternative> getDeepCopyAlternatives(List<Alternative> alternatives) {
+        return alternatives.stream()
+            .map(x -> {
+                Alternative alternative = new Alternative();
+                alternative.setId(x.getId());
+                alternative.setName(x.getName());
+                alternative.setAssessments(new ArrayList<>(x.getAssessments()));
+                return alternative;
+            }).collect(Collectors.toList());
     }
 
     public QuasiExpert getQes(Long quasiExpertId) {
         return quasiExpertDAO.getQuasiExpertById(quasiExpertId);
+    }
+
+    public FullAlternativeResult getRankAlternatives(Long userId) throws UserNotFoundException {
+        UserEntity userEntity = identifyUser(userId);
+        return userEntity.getFullAlternativeResult().toModel();
+//        return userEntity.getFullAlternativeResult().stream()
+//            .peek(x -> System.out.println("there is!!! : " + x + " " + x.toModel()))
+//            .findFirst()
+//            .get()
+//            .toModel();
+
     }
 }

@@ -53,7 +53,9 @@ export class CheckValidComponent implements OnInit {
   }
 
   rankAlternatives() {
-    this.router.navigate(['/view/result', this.userId]);
+    this._zaprosService.rankAlternatives(this.userId).subscribe(() => {
+      this.router.navigate(['/view/result', this.userId]);
+    });
   }
 
   replaceAnswer(type: string) {

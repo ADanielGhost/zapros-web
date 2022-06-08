@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.polytech.zapros.bean.Answer;
@@ -58,6 +59,9 @@ public class UserEntity implements IEntity<User> {
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
     private Set<QuasiExpertEntity> quasiExpertSet = new HashSet<>();
+
+    @OneToOne(mappedBy = "user")
+    private FullAlternativeResultEntity fullAlternativeResult;
 
     @Override
     public User toModel() {

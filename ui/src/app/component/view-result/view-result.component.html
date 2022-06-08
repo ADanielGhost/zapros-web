@@ -26,8 +26,23 @@
             <h5 class="my-1 text-center">Ранг альтернативы и ее имя:</h5>
           </li>
 
-          <li class="list-group-item" *ngFor="let alternativeResult of fullAlternativeResult.rankOrderResult">
+          <li class="list-group-item" *ngFor="let alternativeResult of fullAlternativeResult.rankOrderResult.alternativeResults">
             {{alternativeResult.finalRank}} -> {{alternativeResult.alternative.name}}
+          </li>
+
+          <li class="list-group-item">
+            <h5 class="my-1 text-center">Дополнительно:</h5>
+            Время ранжирования: {{fullAlternativeResult.rankOrderResult.nanoTime}} наносекунд (10 в -9 секунд)<br>
+            Кол-во квазиэкспеертов: {{fullAlternativeResult.rankOrderResult.countCompareBetter.length}}<br>
+            Попарно были сравнены {{fullAlternativeResult.rankOrderResult.alternativeResults.length}} альтернатив - это {{
+              fullAlternativeResult.rankOrderResult.countCompareBetter[0] +
+              fullAlternativeResult.rankOrderResult.countCompareWorse[0] +
+              fullAlternativeResult.rankOrderResult.countCompareEqual[0] +
+              fullAlternativeResult.rankOrderResult.countCompareNotComparable[0]}} сравнений (для каждого квазиэксперта)<br>
+            Кол-во пар с оценкой лучше: {{fullAlternativeResult.rankOrderResult.countCompareBetter.join(", ")}}<br>
+            Кол-во пар с оценкой хуже: {{fullAlternativeResult.rankOrderResult.countCompareWorse.join(", ")}}<br>
+            Кол-во эквивалентных: {{fullAlternativeResult.rankOrderResult.countCompareEqual.join(", ")}}<br>
+            Кол-во несравнимых: {{fullAlternativeResult.rankOrderResult.countCompareNotComparable.join(", ")}}<br>
           </li>
         </ul>
       </div>
@@ -44,8 +59,23 @@
             <h5 class="my-1 text-center">Ранг альтернативы и ее имя:</h5>
           </li>
 
-          <li class="list-group-item" *ngFor="let alternativeResult of fullAlternativeResult.rankQVResult">
+          <li class="list-group-item" *ngFor="let alternativeResult of fullAlternativeResult.rankQVResult.alternativeResults">
             {{alternativeResult.finalRank}} -> {{alternativeResult.alternative.name}}
+          </li>
+
+          <li class="list-group-item">
+            <h5 class="my-1 text-center">Дополнительно:</h5>
+            Время ранжирования: {{fullAlternativeResult.rankQVResult.nanoTime}} наносекунд (10 в -9 секунд)<br>
+            Кол-во квазиэкспеертов: {{fullAlternativeResult.rankQVResult.countCompareBetter.length}}<br>
+            Попарно были сравнены {{fullAlternativeResult.rankQVResult.alternativeResults.length}} альтернатив - это {{
+              fullAlternativeResult.rankQVResult.countCompareBetter[0] +
+              fullAlternativeResult.rankQVResult.countCompareWorse[0] +
+              fullAlternativeResult.rankQVResult.countCompareEqual[0] +
+              fullAlternativeResult.rankQVResult.countCompareNotComparable[0]}} сравнений (для каждого квазиэксперта)<br>
+            Кол-во пар с оценкой лучше: {{fullAlternativeResult.rankQVResult.countCompareBetter.join(", ")}}<br>
+            Кол-во пар с оценкой хуже: {{fullAlternativeResult.rankQVResult.countCompareWorse.join(", ")}}<br>
+            Кол-во эквивалентных: {{fullAlternativeResult.rankQVResult.countCompareEqual.join(", ")}}<br>
+            Кол-во несравнимых: {{fullAlternativeResult.rankQVResult.countCompareNotComparable.join(", ")}}<br>
           </li>
         </ul>
       </div>

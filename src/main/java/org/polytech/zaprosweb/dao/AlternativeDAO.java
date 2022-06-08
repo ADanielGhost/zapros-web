@@ -42,4 +42,8 @@ public class AlternativeDAO {
 
         alternativeRepository.saveAll(alternativeEntityList);
     }
+
+    public AlternativeEntity getAlternativeById(long id) {
+        return alternativeRepository.findById(id).orElseThrow(IllegalStateException::new);
+    }
 }

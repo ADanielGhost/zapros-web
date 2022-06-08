@@ -1,5 +1,6 @@
 package org.polytech.zaprosweb.dao.entity;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -51,6 +52,7 @@ public class AlternativePackageEntity implements IEntity<AlternativePackage> {
     public AlternativePackage toModel() {
         List<Alternative> alternatives = alternativeSet.stream()
             .map(AlternativeEntity::toModel)
+            .sorted(Comparator.comparing(Alternative::getName))
             .collect(Collectors.toList());
 
         List<User> users = userSet.stream()

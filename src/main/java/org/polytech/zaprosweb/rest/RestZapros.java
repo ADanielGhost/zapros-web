@@ -71,8 +71,14 @@ public class RestZapros {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/rank/alternatives/{userId}", method = RequestMethod.GET)
-    public FullAlternativeResult rankAlternatives(@PathVariable("userId") Long userId) throws UserNotFoundException {
-        return zaprosService.rankAlternatives(userId);
+    @RequestMapping(value = "/rank/alternatives/{userId}", method = RequestMethod.POST)
+    public void rankAlternatives(@PathVariable("userId") Long userId) throws UserNotFoundException {
+        zaprosService.rankAlternatives(userId);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/get/rank/alternatives/{userId}", method = RequestMethod.GET)
+    public FullAlternativeResult getRankAlternatives(@PathVariable("userId") Long userId) throws UserNotFoundException {
+        return zaprosService.getRankAlternatives(userId);
     }
 }

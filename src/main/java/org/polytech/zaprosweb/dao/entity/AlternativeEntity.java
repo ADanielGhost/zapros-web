@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.polytech.zapros.bean.Alternative;
@@ -28,13 +30,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 @Table(name = "alternatives")
 public class AlternativeEntity implements IEntity<Alternative> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(nullable = false)
     private String name;
 
     @ManyToMany
@@ -43,12 +45,14 @@ public class AlternativeEntity implements IEntity<Alternative> {
         joinColumns = @JoinColumn(name = "alternative_id"),
         inverseJoinColumns = @JoinColumn(name = "assessmentId")
     )
-    @ToString.Exclude
     private Set<AssessmentEntity> assessmentSet = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "alternative_package_id", nullable = false)
     private AlternativePackageEntity alternativePackage;
+
+    @OneToOne(mappedBy = "alternative")
+    private AlternativeWebResultEntity alternativeWebResult;
 
     @Override
     public Alternative toModel() {

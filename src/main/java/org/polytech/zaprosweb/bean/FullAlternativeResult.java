@@ -3,6 +3,7 @@ package org.polytech.zaprosweb.bean;
 import java.util.List;
 
 import org.polytech.zapros.bean.MethodType;
+import org.polytech.zapros.bean.alternative.AlternativeRankingResult;
 import org.polytech.zapros.bean.alternative.AlternativeResult;
 
 import lombok.AllArgsConstructor;
@@ -14,10 +15,16 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 public class FullAlternativeResult {
+    private long id;
     private MethodType methodType;
-    private List<? extends AlternativeResult> rankOrderResult;
-    private List<? extends AlternativeResult> rankQVResult;
+    private AlternativeWebRankingResult rankOrderResult;
+    private AlternativeWebRankingResult rankQVResult;
+
+    public FullAlternativeResult(MethodType methodType, AlternativeWebRankingResult rankOrderResult, AlternativeWebRankingResult rankQVResult) {
+        this.methodType = methodType;
+        this.rankOrderResult = rankOrderResult;
+        this.rankQVResult = rankQVResult;
+    }
 }

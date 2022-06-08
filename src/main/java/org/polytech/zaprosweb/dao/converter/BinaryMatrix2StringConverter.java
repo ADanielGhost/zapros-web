@@ -14,8 +14,8 @@ public class BinaryMatrix2StringConverter implements AttributeConverter<int[][],
     @Override
     public String convertToDatabaseColumn(int[][] attribute) {
         return Arrays.stream(attribute)
-            .map(row -> Arrays.stream(row).reduce(0, (acc, e) -> acc * 10 + e))
-            .map(x -> Integer.parseInt(String.valueOf(x), 2))
+            .map(row -> Arrays.stream(row).mapToObj(String::valueOf).collect(Collectors.joining("")))
+            .map(x -> Integer.parseInt(x, 2))
             .map(Integer::toHexString)
             .collect(Collectors.joining(DELIMITER));
     }

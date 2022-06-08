@@ -23,7 +23,7 @@ export class ViewResultComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = parseInt(<string> this.route.snapshot.paramMap.get('id'));
-    this._zaprosService.rankAlternatives(this.userId).subscribe(x => {
+    this._zaprosService.getRankAlternatives(this.userId).subscribe(x => {
       this.fullAlternativeResult = x;
     });
   }

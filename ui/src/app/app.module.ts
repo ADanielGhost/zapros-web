@@ -15,6 +15,7 @@ import { AskComponent } from './component/ask/ask.component';
 import { CheckValidComponent } from './component/check-valid/check-valid.component';
 import { AlertComponent } from './component/alert/alert.component';
 import { ViewResultComponent } from './component/view-result/view-result.component';
+import { WelcomeComponent } from './component/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ViewResultComponent } from './component/view-result/view-result.compone
     AskComponent,
     CheckValidComponent,
     AlertComponent,
-    ViewResultComponent
+    ViewResultComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

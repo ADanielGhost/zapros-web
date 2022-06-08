@@ -7,9 +7,11 @@ import {RegisterUserComponent} from "./component/register-user/register-user.com
 import {AskComponent} from "./component/ask/ask.component";
 import {CheckValidComponent} from "./component/check-valid/check-valid.component";
 import {ViewResultComponent} from "./component/view-result/view-result.component";
+import {WelcomeComponent} from "./component/welcome/welcome.component";
 
 const routes: Routes = [
-  {path: '', redirectTo: '/projects', pathMatch: 'full'},
+  {path: '', redirectTo: '/welcome', pathMatch: 'full'},
+  {path: 'welcome', component: WelcomeComponent},
   {path: 'projects', component: ProjectComponent},
   {path: 'projects/:id', component: ProjectOneComponent},
   {path: 'new/user/:id', component: RegisterUserComponent},

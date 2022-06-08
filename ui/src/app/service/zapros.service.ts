@@ -37,7 +37,11 @@ export class ZaprosService {
     return this._backendService.post<BuildingQesCheckResult>(this.mapping + `/replace/answer/${userId}/${answerType}`, checkResult);
   }
 
-  rankAlternatives(userId: number): Observable<FullAlternativeResult> {
-    return this._backendService.get<FullAlternativeResult>(this.mapping + `/rank/alternatives/${userId}`);
+  rankAlternatives(userId: number): Observable<void> {
+    return this._backendService.post<void>(this.mapping + `/rank/alternatives/${userId}`, null);
+  }
+
+  getRankAlternatives(userId: number): Observable<FullAlternativeResult> {
+    return this._backendService.get<FullAlternativeResult>(this.mapping + `/get/rank/alternatives/${userId}`);
   }
 }

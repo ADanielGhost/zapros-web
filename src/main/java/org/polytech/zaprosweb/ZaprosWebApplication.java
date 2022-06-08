@@ -8,7 +8,7 @@ public class ZaprosWebApplication {
 
 	public static void main(String[] args) {
         new SpringApplicationBuilder()
-//            .profiles("dev")
+            .profiles("dev")
             .sources(ZaprosWebApplication.class)
             .run(args);
     }
