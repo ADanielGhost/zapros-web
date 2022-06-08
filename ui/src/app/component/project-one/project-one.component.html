@@ -44,10 +44,12 @@
           </h5>
 
           <div *ngFor="let alternative of alternativePackage.alternatives">
-            "{{alternative.name}}":
-            <span *ngFor="let assessment of alternative.assessments">
-              {{assessment.name}}({{assessment.rank}})
-            </span>
+            <p>
+              "{{alternative.name}}": <br>
+              <span *ngFor="let assessment of alternative.assessments">
+                {{assessment.name}}({{assessment.rank}}) <br>
+              </span>
+            </p>
           </div>
 
           <button type="button"
