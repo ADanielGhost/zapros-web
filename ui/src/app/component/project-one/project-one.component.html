@@ -5,6 +5,12 @@
       Снизу перечислены критерии с оценками, а также наборы альтернатив<br>
       Для желаемого набора просто нажмите на кнопку - и вы перейдете к построению вопросов
     </p>
+    <p class="lead text-muted">
+      Для каждого критерия оценки упорядочены по рангу<br>
+      То есть, если для критерия "Стоимость квартиры" есть оценки "Цена 50000$"(ранг 1), "Цена 100000$"(ранг 2) и "Цена 500000$"(ранг 3),
+      <br>
+      то "Цена 50000$" лучше "Цена 100000$" лучше "Цена 500000$"
+    </p>
   </div>
 </section>
 
@@ -13,12 +19,12 @@
     <div class="card">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-            <h4 class="my-1 text-center">Критерии:</h4>
+            <h4 class="my-1 text-center">Критерии (номера для удобства):</h4>
         </li>
 
         <li class="list-group-item" *ngFor="let criteria of currentProject.criteriaList">
           <h5>Критерий "{{criteria.name}}", номер {{criteria.orderId}}:</h5>
-          Оценки (имя, ранг):
+          Оценки (имя, ранг, номер):
           <div *ngFor="let assessment of criteria.assessments">
             "{{assessment.name}}": {{assessment.rank}}, номер {{assessment.orderId}}
           </div>
@@ -32,7 +38,7 @@
           <h5>
             Набор "{{alternativePackage.name}}"<br>
             Кол-во альтернатив: {{alternativePackage.alternatives.length}}<br>
-            Список альтернатив с оценками и рангами:
+            Список альтернатив с оценками и рангами в скобках (оценки можно посмотреть по критериям выше):
           </h5>
 
           <div *ngFor="let alternative of alternativePackage.alternatives">

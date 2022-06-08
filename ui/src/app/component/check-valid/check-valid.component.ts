@@ -48,8 +48,9 @@ export class CheckValidComponent implements OnInit {
     this.assessmentJ = this.checkResult.answerForReplacing.j;
     this.answerType = this.checkResult.answerForReplacing.answerType;
 
-    this.textChoose = `Ранее вы говорили, что ${this.assessmentI.name}(${this.assessmentI.rank}) ${this.answerType},`+
-      ` чем ${this.assessmentJ.name}(${this.assessmentJ.rank}). Данный ответ вызывает противоречия. Что для вас лучше сейчас?`
+    const answerTypeStr = this.answerType == 'BETTER' ? 'лучше' : 'WORSE' ? 'хуже' : "одинакова по предпочтению";
+    this.textChoose = `Ранее вы говорили, что оценка ${this.assessmentI.name}(ранг ${this.assessmentI.rank}) ${answerTypeStr},`+
+      ` чем ${this.assessmentJ.name}(ранг ${this.assessmentJ.rank}). Данный ответ вызывает противоречия. Что для вас лучше сейчас?`
   }
 
   rankAlternatives() {

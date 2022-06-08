@@ -75,9 +75,9 @@ export class AskComponent implements OnInit {
     this.bestAssessmentI = this.criteriaI.assessments[0];
     this.bestAssessmentJ = this.criteriaJ.assessments[0];
 
-    this.textCompare = `Сравниваем критерии ${this.criteriaI.orderId} - ${this.criteriaI.name} и ${this.criteriaJ.orderId} - ${this.criteriaJ.name}`;
-    this.textChoose = `Что для вас лучше: ${this.assessmentI.name}(${this.assessmentI.rank}) и ${this.bestAssessmentJ.name} или ` +
-      `${this.bestAssessmentI.name} и ${this.assessmentJ.name}(${this.assessmentJ.rank}), если остальные критерии имеют лучшие показатели?`;
+    this.textCompare = `Сравниваем критерии "${this.criteriaI.name}" и "${this.criteriaJ.name}"`;
+    this.textChoose = `Что для вас лучше: ${this.assessmentI.name}(ранг ${this.assessmentI.rank}) и ${this.bestAssessmentJ.name} или ` +
+      `${this.bestAssessmentI.name} и ${this.assessmentJ.name}(ранг ${this.assessmentJ.rank}), если остальные критерии имеют лучшие показатели?`;
   }
 
   sendAnswers() {

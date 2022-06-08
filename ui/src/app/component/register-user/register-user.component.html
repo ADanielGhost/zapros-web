@@ -7,6 +7,10 @@
   </div>
 </section>
 
+<app-alert *ngIf="this.needAlert"
+  [text]="this.textAlert"
+></app-alert>
+
 <div class="d-flex bg-light">
   <div class="mx-auto" style="width: 50%">
     <form [formGroup]="registrationForm" (submit)="sendToBack()" novalidate>
@@ -21,14 +25,12 @@
       <div class="form-group my-3">
         <label for="methodType" class="form-label">Тип метода</label>
         <select class="form-control" id="methodType" formControlName="methodType">
-          <option>ZAPROS_II</option>
-          <option>ZAPROS_III</option>
+          <option>ZAPROS</option>
           <option>ARACE</option>
-          <option>ARACE_QV</option>
         </select>
       </div>
       <div class="form-group my-3">
-        <label for="threshold" class="form-label mb-1">Ваш threshold (только для ARACE и ARACE_QV):</label>
+        <label for="threshold" class="form-label mb-1">Ваш порог (только для ARACE):</label>
         <input type="email" class="form-control" id="threshold" placeholder="0.25" formControlName="threshold">
       </div>
       <button type="submit"

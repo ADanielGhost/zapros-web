@@ -16,7 +16,7 @@
   </div>
 
   <section class="jumbotron text-center m-4" *ngIf="!checkResult.over">
-    <h1 class="jumbotron-heading">Обраружены противоречия!</h1>
+    <h1 class="jumbotron-heading">Обнаружены противоречия!</h1>
   </section>
 
   <div class="d-flex d-flex py-4 bg-light" *ngIf="!checkResult.over">
@@ -32,7 +32,7 @@
                       class="btn btn-lg btn-block btn-outline-primary mx-auto"
                       style="width: 50%"
                       (click)="replaceAnswer('BETTER')">
-                BETTER
+                ПЕРВАЯ оценка предпочтительнее
               </button>
             </div>
           </li>
@@ -43,7 +43,7 @@
                       class="btn btn-lg btn-block btn-outline-primary mx-auto"
                       style="width: 50%"
                       (click)="replaceAnswer('WORSE')">
-                WORSE
+                ВТОРАЯ оценка предпочтительнее
               </button>
             </div>
           </li>
@@ -54,7 +54,7 @@
                       class="btn btn-lg btn-block btn-outline-primary mx-auto"
                       style="width: 50%"
                       (click)="replaceAnswer('EQUAL')">
-                EQUAL
+                Они для меня РАВНЫ/затрудняюсь ответить
               </button>
             </div>
           </li>

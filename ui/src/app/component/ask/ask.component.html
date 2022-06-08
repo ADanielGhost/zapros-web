@@ -1,3 +1,15 @@
+<section class="jumbotron text-center m-4" *ngIf="!checkResult">
+  <h1 class="jumbotron-heading">Памятка</h1>
+
+  <div class="container">
+    <p class="lead text-muted">
+      Вам предлагается сравнить 2 альтернативы<br>
+      Оценки несравниваемых в данный момент критериев подразумеваются наилучшими<br>
+      (то есть, если мы сравниваем "Безопасность района" и "Удаленность от метро", то "Стоимость квартиры" считается наилучшей (самой дешевой)
+    </p>
+  </div>
+</section>
+
 <div class="d-flex" *ngIf="!checkResult">
   <button type="button"
           class="btn btn-lg btn-block btn-outline-primary mx-auto"

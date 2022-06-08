@@ -3,12 +3,23 @@
     <h1 class="jumbotron-heading">Поздравляем!</h1>
     <div class="container">
       <p class="lead text-muted">
-        Вы ответили на вопросы и получили ранги альтернатив, исходя из своих предпочтений<br>
-        С одной стороны порядковое ранжирование (методы ZAPROS_II, ARACE),<br>
-        с другой - интервальное (ZAPROS_III, ARACE_QV)
+        Вы ответили на вопросы и получили ранги альтернатив, исходя из своих предпочтений
       </p>
       <p class="lead text-muted">
-        Ваш метод: {{this.fullAlternativeResult.methodType}}
+        В каждой колонке сначала пишется ранг, потом - альтернатива
+      </p>
+      <p class="lead text-muted">
+        С одной стороны ранжирование на основе предпочтений оценок (методы ZAPROS_II, ARACE),<br>
+        с другой - ранжирование на основе изменений качества (ZAPROS_III, ARACE_QV)
+      </p>
+      <p class="lead text-muted">
+        Раздел дополнительно больше для меня, если интресно, что там - напишите мне :)
+      </p>
+      <p class="lead text-muted">
+        Большое спасибо за участие в эксперементе!
+      </p>
+      <p class="lead text-muted">
+        Ваш метод: {{this.fullAlternativeResult.methodType == 'ZAPROS_II' ? 'ZAPROS' : 'ARACE'}}
       </p>
     </div>
   </section>
@@ -19,7 +30,7 @@
       <div class="card">
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            <h4 class="card-title text-center my-1">Порядковое (ZAPROS_II или ARACE)</h4>
+            <h4 class="card-title text-center my-1">Метод {{this.fullAlternativeResult.methodType == 'ZAPROS_II' ? 'ZAPROS II' : 'ARACE'}}</h4>
           </li>
 
           <li class="list-group-item">
@@ -52,7 +63,7 @@
       <div class="card">
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            <h4 class="card-title text-center my-1">Интервальное (ZAPROS_III или ARACE_QV)</h4>
+            <h4 class="card-title text-center my-1">Метод {{this.fullAlternativeResult.methodType == 'ZAPROS_II' ? 'ZAPROS III' : 'ARACE_QV'}}</h4>
           </li>
 
           <li class="list-group-item">

@@ -4,24 +4,69 @@
     <p class="lead text-muted">
       Приветствуем!
     </p>
-    <p class="lead text-muted">
-      Какой-то абзац
-    </p>
-    <p class="lead text-muted">
-      Методы ZAPROS_II и ZAPROS_III, а так же ARACE и ARACE_QV требуют для ранжирования одинаковые данные.<br>
-      Разница в том, что ZAPROS_II и ARACE считают на порядковых шкалах, а ZAPROS_III и ARACE_QV - на интервальных
-    </p>
-    <p class="lead text-muted">
-      Threshold позволяет задать допустимый порог противоречий (актуально только для ARACE и ARACE_QV).<br>
-      По умолчанию 0,25
-    </p>
   </div>
 </section>
 
-<div class="d-flex m-4">
-  <button type="button"
-          class="btn btn-lg btn-block btn-outline-primary mx-auto"
-          (click)="toProjects()">
-    Перейти к проектам
-  </button>
+<div class="d-flex py-5 bg-light">
+  <div class="card mx-auto" style="width: 50%">
+    <div class="card">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <h4 class="my-1 text-center">О приложении</h4>
+        </li>
+        <li class="list-group-item">
+          Данное приложение направлено на помощь в принятии решения при <b>выборе альтернативы</b> с множеством критериев и оценок.
+          <br>
+          Типичный пример - <b>снятие квартиры</b>. У квартиры может быть множество <b>критериев</b>, по которым вы будете выбирать (к примеру,
+          цена, удаленность от метро, чистота района, ...) и может быть много <b>оценок</b> в рамках каждого критерия (для удаленности от метро,
+          например, метро в 5 минутах, метро в 10 минутах, метро в 50 минутах, ...)
+        </li>
+        <li class="list-group-item">
+          <h4 class="my-1 text-center">Ваша задача</h4>
+        </li>
+        <li class="list-group-item">
+          Вам будет предложено <b>попарно сравнивать</b> 2 "постоенные" альтернативы, изменяющиеся по 1 критерию и по одной оценке в них.
+          <br>
+          На основе попарных сравнений будут постоены <b>зависимости</b> между всеми оценками критериев, что поможет уже <b>ранжировать</b> реальные альтернативы.
+          В случаях наличия противоречий вам также будет предложено <b>переответить</b> на вопрос.
+        </li>
+        <li class="list-group-item">
+          <h4 class="my-1 text-center">Описание методов</h4>
+        </li>
+        <li class="list-group-item">
+          Программа работает с методами вербального анализа решений ZAPROS. Программа может работать с 4 методами -
+          <b>ZAPROS II</b>, <b>ZAPROS III</b>, <b>ARACE</b> и <b>ARACE_QV</b>.
+        </li>
+        <li class="list-group-item">
+          Методы ZAPROS II и ZAPROS III <b>не допускают противоречий</b> в ответах пользователя (то есть, если вы говорите, что A > B и B > C (то есть, A > C),
+          а потом говорите, что C > A, придется <b>исправлять</b> противоречия).
+          <br>
+          Методы ARACE и ARACE_QV <b>допускают их до определенного порога</b> (threshold - этот порог, может принимать значения
+          <b>от 0 до 1</b>, где 0 это отсутствие противоречий (методы будут аналогичны методам ZAPROS, а 1 отсутствие проверки на противоречия). Рекомендуется ставить <b>0.25</b>. Порог, соответственно, доступен только для ARACE и ARACE_QV.
+        </li>
+        <li class="list-group-item">
+          Методы ZAPROS и ARACE строят изменения <b>на основе рангов оценок и строят квазипорядок</b>, в то время как ZAPROS III и ARACE_QV строят <b>на основе изменений качеств между оценками и строят совершенный порядок</b>.
+          <br>
+          Также методы ZAPROS_II и ZAPROS_III, а так же ARACE и ARACE_QV требуют для ранжирования одинаковые данные, поэтому вам будет<br>
+          предложено выбрать либо ZAPROS (и получить ранжирование по ZAPROS II и ZAPROS III), либо ARACE (соответственно, ARACE и ARACE_QV).<br>
+        </li>
+        <li class="list-group-item">
+          <h4 class="my-1 text-center">Резюмируя по методам</h4>
+        </li>
+        <li class="list-group-item">
+          <b>ZAPROS II</b> - квазипорядок и отсутствие противоречий <br>
+          <b>ZAPROS III</b> - совершенный порядок и отсутствие противоречий <br>
+          <b>ARACE</b> - квазипорядок и допустимые противоречия по порогу <br>
+          <b>ARACE_QV</b> - совершенный порядок и допустимые противоречия по порогу
+        </li>
+        <li class="list-group-item d-flex">
+          <button type="button"
+                  class="btn btn-lg btn-block btn-outline-primary mx-auto my-3"
+                  (click)="toProjects()">
+            Перейти к проектам
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
