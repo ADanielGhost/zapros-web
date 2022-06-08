@@ -1,7 +1,7 @@
 <app-loading *ngIf="!isDataLoad"></app-loading>
 
 <app-alert *ngIf="needAlert"
-           [text]="'Вы уже исправляли противоречия! Напишите мне! Тут может быть неприятный баг :('"
+           [text]="'Возможно, вы уже исправляли противоречия! Напишите мне! Тут может быть неприятный баг :('"
 ></app-alert>
 
 <div *ngIf="checkResult">
@@ -24,10 +24,22 @@
   <div class="d-flex d-flex py-4 bg-light" *ngIf="!checkResult.over">
     <div class="card mx-auto" style="width: 50%">
       <div class="card">
-        <div class="card-header text-center">
-          {{textChoose}}
-        </div>
         <ul class="list-group list-group-flush">
+          <li class="list-group-item text-center">
+            Ранее вы говорили, что оценка
+          </li>
+          <li class="list-group-item text-center list-group-item-primary">
+            {{textChoose1}}
+          </li>
+          <li class="list-group-item text-center">
+            {{textChoose2}}
+          </li>
+          <li class="list-group-item text-center list-group-item-primary">
+            {{textChoose3}}
+          </li>
+          <li class="list-group-item text-center">
+            Данный ответ вызывает противоречия. Что для вас лучше сейчас?
+          </li>
           <li class="list-group-item">
             <div class="d-flex">
               <button type="button"

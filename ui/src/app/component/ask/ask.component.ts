@@ -25,7 +25,9 @@ export class AskComponent implements OnInit {
   public bestAssessmentJ: Assessment | undefined;
 
   public textCompare: string | undefined;
-  public textChoose: string | undefined;
+
+  public textChoose2: string | undefined;
+  public textChoose4: string | undefined;
 
   public needAlert: boolean = false;
   public isDataLoad: boolean = true;
@@ -78,8 +80,11 @@ export class AskComponent implements OnInit {
     this.bestAssessmentJ = this.criteriaJ.assessments[0];
 
     this.textCompare = `Сравниваем критерии "${this.criteriaI.name}" и "${this.criteriaJ.name}"`;
-    this.textChoose = `Что для вас лучше:\n ${this.assessmentI.name}(ранг ${this.assessmentI.rank}) и ${this.bestAssessmentJ.name}\nили\n` +
-      `${this.bestAssessmentI.name} и ${this.assessmentJ.name}(ранг ${this.assessmentJ.rank})\n, если остальные критерии имеют лучшие показатели?`;
+    // this.textChoose = `Что для вас лучше:\n ${this.assessmentI.name}(ранг ${this.assessmentI.rank}) и ${this.bestAssessmentJ.name}\nили\n` +
+    //   `${this.bestAssessmentI.name} и ${this.assessmentJ.name}(ранг ${this.assessmentJ.rank})\n, если остальные критерии имеют лучшие показатели?`;
+
+    this.textChoose2 = `${this.assessmentI.name}(ранг ${this.assessmentI.rank}) и ${this.bestAssessmentJ.name}`;
+    this.textChoose4 = `${this.bestAssessmentI.name} и ${this.assessmentJ.name}(ранг ${this.assessmentJ.rank})`;
   }
 
   sendAnswers() {

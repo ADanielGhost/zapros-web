@@ -44,11 +44,23 @@
   <div class="d-flex py-4 bg-light" *ngIf="!checkResult.over">
     <div class="card mx-auto" style="width: 50%">
       <div class="card">
-        <div class="card-header text-center">
-          <h5>{{textChoose}}</h5>
-        </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">
+          <li class="list-group-item text-center">
+            Что для вас лучше:
+          </li>
+          <li class="list-group-item text-center list-group-item-primary">
+            <b>{{textChoose2}}</b>
+          </li>
+          <li class="list-group-item text-center">
+            или
+          </li>
+          <li class="list-group-item text-center list-group-item-primary">
+            <b>{{textChoose4}}</b>
+          </li>
+          <li class="list-group-item text-center">
+            если остальные критерии имеют лучшие показатели?
+          </li>
+          <li class="list-group-item text-center">
             <div class="d-flex">
               <button type="button"
                       class="btn btn-lg btn-block btn-outline-primary mx-auto"

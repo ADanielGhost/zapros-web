@@ -20,7 +20,9 @@ export class CheckValidComponent implements OnInit {
   public assessmentJ: Assessment | undefined;
   public answerType: AnswerType | undefined;
 
-  public textChoose: string | undefined;
+  public textChoose1: string | undefined;
+  public textChoose2: string | undefined;
+  public textChoose3: string | undefined;
 
   public needAlert: boolean = false;
   public isDataLoad: boolean = false;
@@ -51,8 +53,12 @@ export class CheckValidComponent implements OnInit {
     this.answerType = this.checkResult.answerForReplacing.answerType;
 
     const answerTypeStr = this.answerType == 'BETTER' ? 'лучше' : 'WORSE' ? 'хуже' : "одинакова по предпочтению";
-    this.textChoose = `Ранее вы говорили, что оценка\n${this.assessmentI.name}(ранг ${this.assessmentI.rank})\n${answerTypeStr},`+
-      ` чем \n${this.assessmentJ.name}(ранг ${this.assessmentJ.rank}).\n Данный ответ вызывает противоречия. Что для вас лучше сейчас?`
+    // this.textChoose = `Ранее вы говорили, что оценка\n${this.assessmentI.name}(ранг ${this.assessmentI.rank})\n${answerTypeStr},`+
+    //   ` чем \n${this.assessmentJ.name}(ранг ${this.assessmentJ.rank}).\n Данный ответ вызывает противоречия. Что для вас лучше сейчас?`
+
+    this.textChoose1 = `${this.assessmentI.name}(ранг ${this.assessmentI.rank})`;
+    this.textChoose2 = `${answerTypeStr}, чем`;
+    this.textChoose3 = `${this.assessmentJ.name}(ранг ${this.assessmentJ.rank})`;
   }
 
   rankAlternatives() {

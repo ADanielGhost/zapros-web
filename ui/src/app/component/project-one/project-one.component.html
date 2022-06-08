@@ -26,7 +26,7 @@
 
         <li class="list-group-item" *ngFor="let criteria of currentProject.criteriaList">
           <h5>Критерий "{{criteria.name}}", номер {{criteria.orderId}}:</h5>
-          Оценки (имя, ранг, номер):
+          <b>Оценки (имя, ранг, номер):</b>
           <div *ngFor="let assessment of criteria.assessments">
             "{{assessment.name}}": {{assessment.rank}}, номер {{assessment.orderId}}
           </div>
@@ -45,7 +45,7 @@
 
           <div *ngFor="let alternative of alternativePackage.alternatives">
             <p>
-              "{{alternative.name}}": <br>
+              <b>"{{alternative.name}}":</b> <br>
               <span *ngFor="let assessment of alternative.assessments">
                 {{assessment.name}}({{assessment.rank}}) <br>
               </span>
